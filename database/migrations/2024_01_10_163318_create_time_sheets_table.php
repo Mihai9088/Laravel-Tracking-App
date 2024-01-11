@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('hours_worked', 8, 2);
             $table->float('rate', 8, 2)->nullable();
             $table->timestamps();
+            $table->text('description')->nullable();
         });
     }
 

@@ -77,6 +77,15 @@
         </div>
 
         <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Descriere</label>
+            <textarea class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="description">{{ old('description') }}</textarea>
+            @error('description')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+        
+
+        <div class="mb-4">
             <label for="rate" class="block text-sm font-medium text-gray-700 mb-1">Rate (hour by hour)</label>
             <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="rate" value="{{ old('rate') }}" />
             @error('rate')

@@ -13,9 +13,9 @@
 <div class="max-w-md mx-auto mt-10 bg-white p-8 border border-gray-300 rounded">
     <h1 class="text-2xl font-semibold mb-6">Edit new Timesheet</h1>
 
-    <form action="/timesheets/{{ $timesheet->id }}" method="POST">
+    <form action="{{route('timesheets.update', ['timesheet' => $timesheet])}}" method="POST">
         @csrf
-
+        @method('PUT')  
         <div class="mb-4">
             <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Proiect</label>
             <select name="project" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
@@ -70,9 +70,18 @@
         </div>
 
         <div class="mb-4">
-            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Ore Lucrate</label>
+            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Worked Hours</label>
             <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="hours_worked" value="{{ $timesheet->hours_worked }}" />
             @error('hours_worked')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+
+        <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <textarea class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="description"  >{{ $timesheet->description }}</textarea>
+            @error('description')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>

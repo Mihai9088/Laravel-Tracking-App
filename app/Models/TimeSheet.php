@@ -18,5 +18,6 @@ class TimeSheet extends Model
         'time_out',
         'hours_worked',
         'rate',
+        'description',
     ];
 }
