@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\TimeSheetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TimeSheetController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::get('/', [UserController::class, 'index'])->name('/');
+Route::get('/home', [UserController::class, 'index'])->name('/');
 
 Route::get('/register', [UserController::class, 'create']);
 
@@ -40,3 +42,6 @@ Route::get('/timesheets/{timesheet}/edit', [TimeSheetController::class, 'edit'])
 Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
 Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
 Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
+
+
+Route::get('register/verification', [MailController::class, 'sendMail']);

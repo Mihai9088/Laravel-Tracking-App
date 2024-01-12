@@ -16,7 +16,7 @@
     @include('navbar')
     <x-flashMessages />
 
-    
+    @yield('content')
     
 
     <footer>
