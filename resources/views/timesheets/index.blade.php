@@ -11,6 +11,7 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <x-flashMessages />
+    @include('navbar')
     <div class="max-w-7xl mx-auto p-4">
         <div class="bg-white shadow-md rounded my-6">
             <div class="p-6 bg-gray-50">
@@ -34,6 +35,7 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
 
@@ -81,11 +83,14 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $timeSheets->links() }}
                 @else
                     <p class="text-gray-500">There are no timesheets available.</p>
                 @endif
             </div>
         </div>
     </div>
+
+    @include('footer')
 </body>
 </html>

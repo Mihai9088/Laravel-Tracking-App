@@ -21,7 +21,7 @@
     <span class="font-bold uppercase">Welcome {{auth()->user()->name}}</span>
 </li>
 <li class="mx-2 md:mx-4 my-3 md:my-0">
-    <a href="#" class="text-sm md:text-sm hover:text-[#fdba74] duration-500">HOME</a>
+    <a href="/" class="text-sm md:text-sm hover:text-[#fdba74] duration-500">HOME</a>
 </li>
 
         <li class="mx-2 md:mx-4 my-3 md:my-0">

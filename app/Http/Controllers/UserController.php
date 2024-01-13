@@ -36,7 +36,7 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/register/verification');
     }
 
 

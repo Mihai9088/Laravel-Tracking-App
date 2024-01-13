@@ -13,7 +13,7 @@ class TimeSheetController extends Controller
 
     public function index()
     {
-        $timeSheets = TimeSheet::all();
+        $timeSheets = TimeSheet::paginate(3);
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
@@ -29,7 +29,7 @@ class TimeSheetController extends Controller
             'task' => 'required|string',
             'date_in' => 'required|date',
             'time_in' => 'required|string',
-            'date_out' => 'required|date',
+            'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
             'hours_worked' => 'required|numeric',
             'rate' => 'required|numeric',

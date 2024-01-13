@@ -21,27 +21,27 @@ use App\Http\Controllers\TimeSheetController;
 
 
 
-Route::get('/home', [UserController::class, 'index'])->name('/');
-
+Route::get('/', [UserController::class, 'index'])->name('/');
 Route::get('/register', [UserController::class, 'create']);
-
 Route::post('/users', [UserController::class, 'store']);
-
 Route::post('/logout', [UserController::class, 'logout']);
-
 Route::get('/login', [UserController::class, 'login']);
-
 Route::post('/users/auth', [UserController::class, 'auth']);
 
 
 
-Route::get('/timesheets', [TimeSheetController::class, 'index']);
-Route::get('/timesheets/create', [TimeSheetController::class, 'create']);
-Route::post('/timesheets', [TimeSheetController::class, 'store'])->name('timesheets.store');
-Route::get('/timesheets/{timesheet}/edit', [TimeSheetController::class, 'edit'])->name('timesheets.edit');
-Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
-Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
-Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+});
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/timesheets', [TimeSheetController::class, 'index']);
+    Route::get('/timesheets/create', [TimeSheetController::class, 'create']);
+    Route::post('/timesheets', [TimeSheetController::class, 'store'])->name('timesheets.store');
+    Route::get('/timesheets/{timesheet}/edit', [TimeSheetController::class, 'edit'])->name('timesheets.edit');
+    Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
+    Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
+    Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
+});
 
 Route::get('register/verification', [MailController::class, 'sendMail']);

@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="email" class="inline-block text-lg mb-2"
+                        <label for="email"   class="inline-block text-lg mb-2 "
                             >Email</label
                         >
                         <input
