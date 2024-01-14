@@ -19,18 +19,27 @@
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <a href="/timesheets/create" class="text-blue-500 px-6 py-2 inline-block mb-4 md:mb-0">Create Timesheet</a>
 
-                    <form method="get" action="{{ route('timesheets.filter') }}" class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                   
+
+                    <label for="date-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by date</label>
+
+                    <form action="{{ route('timesheets.filter') }}" method="get" class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                         @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                             <div>
-                                <label for="date_in" class="block text-sm font-medium text-gray-700 mb-1">Date In</label>
-                                <input type="date" class="form-input bg-gray-100 border border-gray-300 p-2 rounded" name="date_in" />
+                                <select name="date-filter" class="form-select bg-gray-100 border border-gray-300 p-2 rounded">
+                                    <option value="">All Dates</option>
+                                    <option value="today">Today</option>
+                                    <option value="yesterday">Yesterday</option>
+                                    <option value="this-week">This Week</option>
+                                    <option value="last-week">Last Week</option>
+                                    <option value="this-month">This Month</option>
+                                    <option value="last-month">Last Month</option>
+                                    <option value="this-year">This Year</option>
+                                    <option value="last-year">Last Year</option>
+                                </select>
                             </div>
-                            <div>
-                                <label for="date_out" class="block text-sm font-medium text-gray-700 mb-1">Date Out</label>
-                                <input type="date" class="form-input bg-gray-100 border border-gray-300 p-2 rounded" name="date_out" />
-                            </div>
-                            <div class="flex items-center mt-5 sm:flex " >
+                            <div class="flex items-center mt-5 sm:flex">
                                 <button type="submit" class="bg-[#020617] hover:bg-[#1f2937] text-white p-2 rounded">Filter</button>
                             </div>
                         </div>

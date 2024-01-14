@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 
 
+
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class TimeSheetController extends Controller
@@ -91,14 +93,45 @@ class TimeSheetController extends Controller
     }
 
 
+
     public function filter(Request $request)
     {
-        $date_in = $request->date_in;
-        $date_out = $request->date_out;
-        $timeSheets = TimeSheet::whereDate('date_in', '>=', $date_in)
-            ->whereDate('date_out', '<=', $date_out)
-            ->get();
+        dd($request->all());
+        $query = TimeSheet::query();
+        $date = $request->date_filter;
+        switch ($date) {
+            case "today":
+                $query->whereDate('date_in', Carbon::today());
+                break;
 
-        return view('timesheets.index', ['timeSheets' => $timeSheets]);
+            case "yesterday":
+                $query->whereDate('date_in', Carbon::yesterday());
+                break;
+
+            case "this-week":
+                $query->whereBetween('date_in', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+
+            case "last-week":
+                $query->whereBetween('date_in', [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]);
+                break;
+
+            case "this-month":
+                $query->whereMonth('date_in', Carbon::now()->month);
+                break;
+
+            case "last-month":
+                $query->whereMonth('date_in', Carbon::now()->subMonth()->month);
+                break;
+
+            case "this-year":
+                $query->whereYear('date_in', Carbon::now()->year);
+                break;
+
+            case "last-year":
+                $query->whereYear('date_in', Carbon::now()->subYear()->year);
+                break;
+        }
+        return  view('timesheets.index', ['timeSheets' => $query->paginate(3)]);
     }
 }

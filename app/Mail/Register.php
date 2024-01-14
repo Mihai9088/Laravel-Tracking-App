@@ -13,12 +13,16 @@ class Register extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $email;
+    public $userName;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($email,  $userName)
     {
-        //
+        $this->email = $email;
+        $this->userName = $userName;
     }
 
     /**
@@ -37,7 +41,11 @@ class Register extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'verification.register',
+            view: 'verification.register',
+            with: [
+                'email' => $this->email,
+                'userName' => $this->userName,
+            ],
         );
     }
 

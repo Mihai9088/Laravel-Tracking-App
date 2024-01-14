@@ -22,6 +22,13 @@
                 <p class="text-gray-700">
                     Thanks for registering! Please check your email click the button below to complete your registration:
                 </p>
+                <p class="mt-4 text-gray-700">
+                    Email: {{ $email }}
+                </p>
+                <p class="mt-4 text-gray-700">
+                    Username: {{ $userName }}
+                </p>
+            
                 <a href="http://127.0.0.1:8000/" style="color: #ffffff;" class="mt-2 mb-2 inline-block bg-[#020617] hover:bg-[#1f2937] text-white px-6 py-2 rounded">
                     Register
                 </a>
@@ -29,6 +36,7 @@
                 <p class="mt-4 text-gray-700">
                     Thanks for choosing {{ config('app.name') }}!
                 </p>
+                
             </div>
         </div>
     </div>
