@@ -16,38 +16,38 @@
         <div class="bg-white shadow-md rounded my-6">
             <div class="p-6 bg-gray-50">
                 <h1 class="text-3xl font-semibold mb-4">Timesheets</h1>
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <a href="/timesheets/create" class="text-blue-500 px-6 py-2 inline-block mb-4 md:mb-0">Create Timesheet</a>
-
-                   
-
-                    <label for="date-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by date</label>
-
-                    <form action="{{ route('timesheets.filter') }}" method="get" class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        @csrf
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            <div>
-                                <select name="date-filter" class="form-select bg-gray-100 border border-gray-300 p-2 rounded">
-                                    <option value="">All Dates</option>
-                                    <option value="today">Today</option>
-                                    <option value="yesterday">Yesterday</option>
-                                    <option value="this-week">This Week</option>
-                                    <option value="last-week">Last Week</option>
-                                    <option value="this-month">This Month</option>
-                                    <option value="last-month">Last Month</option>
-                                    <option value="this-year">This Year</option>
-                                    <option value="last-year">Last Year</option>
-                                </select>
-                            </div>
-                            <div class="flex items-center mt-5 sm:flex">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="flex items-center space-x-4">
+                        <a href="/timesheets/create" class="text-blue-500 px-6 py-2">Create Timesheet</a>
+                        <a href="{{ route('timesheets.export.csv') }}" class="bg-[#020617] hover:bg-[#1f2937] text-white py-2 px-4 rounded">Export CSV</a>
+                    </div>
+        
+                    <div class="flex items-center space-y-4 md:space-y-0 md:space-x-4">
+                        <label for="date-filter" class="block text-sm font-medium text-gray-700">Filter by date</label>
+        
+                        <form action="{{ route('timesheets.filter') }}" method="get" class="flex items-center space-y-4 md:space-y-0 md:space-x-4">
+                            @csrf
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                <div>
+                                    <select name="date-filter" class="form-select bg-gray-100 border border-gray-300 p-2 rounded">
+                                        <option value="">All Dates</option>
+                                        <option value="today">Today</option>
+                                        <option value="yesterday">Yesterday</option>
+                                        <option value="this-week">This Week</option>
+                                        <option value="last-week">Last Week</option>
+                                        <option value="this-month">This Month</option>
+                                        <option value="last-month">Last Month</option>
+                                        <option value="this-year">This Year</option>
+                                        <option value="last-year">Last Year</option>
+                                    </select>
+                                </div>
+        
                                 <button type="submit" class="bg-[#020617] hover:bg-[#1f2937] text-white p-2 rounded">Filter</button>
                             </div>
-                        </div>
-                    </form>
-                    
+                        </form>
+                    </div>
                 </div>
             </div>
-
             <div class="p-6 overflow-x-auto">
                 <h2 class="text-2xl font-semibold mb-6">Timesheets List</h2>
 

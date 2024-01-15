@@ -8,7 +8,10 @@ namespace App\Http\Controllers;
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Exports\timeSheetExport;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TimeSheetController extends Controller
 {
@@ -133,5 +136,13 @@ class TimeSheetController extends Controller
                 break;
         }
         return  view('timesheets.index', ['timeSheets' => $query->paginate(3)]);
+    }
+    public function exportToCsv()
+    {
+        return Excel::download(new timeSheetExport(), 'timesheet.csv');
+    }
+    public function read()
+    {
+        $projects = DB::table('projects')->get();
     }
 }

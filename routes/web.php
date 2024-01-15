@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
     Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
     Route::get('/timesheets/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
+    Route::get('/timesheets/export-csv', [TimeSheetController::class, 'exportToCsv'])->name('timesheets.export.csv');
 });
 
 Route::get('register/verification', [MailController::class, 'sendMail']);
