@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 <body class="bg-gray-100 font-sans">
-    <x-flashMessages />
     @include('navbar')
+    <x-flashMessages />
     <div class="max-w-7xl mx-auto p-4">
         <div class="bg-white shadow-md rounded my-6">
             <div class="p-6 bg-gray-50">

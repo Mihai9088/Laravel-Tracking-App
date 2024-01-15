@@ -13,7 +13,7 @@
 
     </head>
     <body >
-        
+        <x-flashMessages />
 
         <div class="container mx-auto p-8">
             <div class="bg-white max-w-md mx-auto p-8 rounded shadow-md">
