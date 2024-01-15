@@ -13,7 +13,7 @@
 
     </head>
     <body >
-        <x-flashMessages />
+        
 
         <div class="container mx-auto p-8">
             <div class="bg-white max-w-md mx-auto p-8 rounded shadow-md">
@@ -27,6 +27,10 @@
                 </p>
                 <p class="mt-4 text-gray-700">
                     Username: {{ $userName }}
+                </p>
+
+                <p class="mt-4 text-gray-700">
+                    Password: {{ $plainPassword }}
                 </p>
             
                 <a href="http://127.0.0.1:8000/" style="color: #ffffff;" class="mt-2 mb-2 inline-block bg-[#020617] hover:bg-[#1f2937] text-white px-6 py-2 rounded">

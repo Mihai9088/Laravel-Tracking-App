@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -27,6 +28,9 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed|min:6'
         ]);
+
+        $plainPassword = $request->input('password');
+        Session::put('plainPassword', $plainPassword);
 
         $formfields['password'] = bcrypt($formfields['password']);
 

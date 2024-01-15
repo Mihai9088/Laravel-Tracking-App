@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class MailController extends Controller
 {
@@ -14,10 +15,12 @@ class MailController extends Controller
     {
         $userName = Auth::user()->name;
         $email = Auth::user()->email;
+        $plainPassword = Session::get('plainPassword');
 
 
-        Mail::to('tracker@yahoo.com')->send(new Register($email, $userName));
 
-        return view('verification.register', compact('email', 'userName',));
+        Mail::to('tracker@yahoo.com')->send(new Register($email, $userName, $plainPassword));
+
+        return view('verification.register', compact('email', 'userName', 'plainPassword'));
     }
 }

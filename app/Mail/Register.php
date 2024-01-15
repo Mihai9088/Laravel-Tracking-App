@@ -15,14 +15,16 @@ class Register extends Mailable
 
     public $email;
     public $userName;
+    public $plainPassword;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($email,  $userName)
+    public function __construct($email,  $userName, $plainPassword)
     {
         $this->email = $email;
         $this->userName = $userName;
+        $this->plainPassword = $plainPassword;
     }
 
     /**
@@ -45,6 +47,7 @@ class Register extends Mailable
             with: [
                 'email' => $this->email,
                 'userName' => $this->userName,
+                'plainPassword' => $this->plainPassword
             ],
         );
     }
