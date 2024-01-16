@@ -42,6 +42,7 @@ class TimeSheetController extends Controller
         ]);
 
 
+
         TimeSheet::create([
             'project' => $request->input('project'),
             'task' => $request->input('task'),
@@ -99,9 +100,10 @@ class TimeSheetController extends Controller
 
     public function filter(Request $request)
     {
-        dd($request->all());
+
         $query = TimeSheet::query();
         $date = $request->date_filter;
+        dd($request->date_filter);
         switch ($date) {
             case "today":
                 $query->whereDate('date_in', Carbon::today());
@@ -140,9 +142,5 @@ class TimeSheetController extends Controller
     public function exportToCsv()
     {
         return Excel::download(new timeSheetExport(), 'timesheet.csv');
-    }
-    public function read()
-    {
-        $projects = DB::table('projects')->get();
     }
 }

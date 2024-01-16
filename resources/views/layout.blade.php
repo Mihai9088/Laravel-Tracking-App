@@ -17,6 +17,12 @@
     <x-flashMessages />
 
     @yield('content')
+    <div class="flex items-center justify-center h-screen w-screen">
+        <div class="  text-black p-4">
+            <h1 class="text-3xl font-bold mb-2">Welcome to the Home Page!</h1>
+            <p class="mb-4">Please login or register to use our features.</p>
+        </div>
+    </div>
     
 
     <footer>

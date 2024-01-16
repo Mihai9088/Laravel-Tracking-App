@@ -30,6 +30,7 @@ Route::post('/users/auth', [UserController::class, 'auth']);
 
 
 
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
 });
@@ -44,5 +45,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/timesheets/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
     Route::get('/timesheets/export-csv', [TimeSheetController::class, 'exportToCsv'])->name('timesheets.export.csv');
 });
-
-Route::get('register/verification', [MailController::class, 'sendMail']);
+Route::get('/register/verification', [MailController::class, 'sendMail']);
