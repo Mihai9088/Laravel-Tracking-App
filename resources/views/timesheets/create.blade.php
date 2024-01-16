@@ -17,7 +17,7 @@
         @csrf
 
         <div class="mb-4">
-            <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Proiect</label>
+            <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Project</label>
             <select name="project" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
                 <option value="proiect1">Project 1</option>
                 <option value="proiect2">Project 2</option>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="mb-4">
-            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Ore Lucrate</label>
+            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Hours Worked</label>
             <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="hours_worked" value="{{ old('hours_worked') }}" />
             @error('hours_worked')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Descriere</label>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="description">{{ old('description') }}</textarea>
             @error('description')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
