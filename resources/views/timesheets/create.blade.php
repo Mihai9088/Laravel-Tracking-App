@@ -43,7 +43,7 @@
 
             <div class="w-1/2">
                 <label for="time_in" class="block text-sm font-medium text-gray-700 mb-1">Time In</label>
-                <input type="text" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="time_in" value="{{ old('time_in') }}" />
+                <input type="time" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="time_in" value="{{ old('time_in') }}" />
                 @error('time_in')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -61,7 +61,7 @@
 
             <div class="w-1/2">
                 <label for="time_out" class="block text-sm font-medium text-gray-700 mb-1">Time Out</label>
-                <input type="text" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="time_out" value="{{ old('time_out') }}" />
+                <input type="time" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="time_out" value="{{ old('time_out') }}" />
                 @error('time_out')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

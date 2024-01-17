@@ -25,7 +25,7 @@
 </li>
 
         <li class="mx-2 md:mx-4 my-3 md:my-0">
-            <a href="/timesheets" class="hover:text-laravel"
+            <a href="/timesheets"
                 ><i class="fa-solid fa-gear"></i> <span class="hover:text-[#737373] duration-500">Manage TimeSheets</span></a
             >
         </li>
@@ -38,17 +38,18 @@
                 <button type="submit">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="hover:text-[#737373] duration-500">Logout</span>
                 </button>
+            </form>
         </li>
 @else
 
 
         <li class="mx-2 md:mx-4 my-3 md:my-0">
-            <a href="/register" class="hover:text-laravel"
+            <a href="/register" 
                 ><i class="fa-solid fa-user-plus"></i> <span class="hover:text-[#737373] duration-500">Register</span></a
             >
         </li>
         <li class="mx-2 md:mx-4 my-3 md:my-0">
-            <a href="/login" class="hover:text-laravel"
+            <a href="/login" 
                 ><i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <span class="hover:text-[#737373] duration-500">Login</span></a
             >

@@ -103,7 +103,7 @@ class TimeSheetController extends Controller
 
         $query = TimeSheet::query();
         $date = $request->date_filter;
-        dd($request->date_filter);
+
         switch ($date) {
             case "today":
                 $query->whereDate('date_in', Carbon::today());
@@ -137,6 +137,7 @@ class TimeSheetController extends Controller
                 $query->whereYear('date_in', Carbon::now()->subYear()->year);
                 break;
         }
+
         return  view('timesheets.index', ['timeSheets' => $query->paginate(3)]);
     }
     public function exportToCsv()

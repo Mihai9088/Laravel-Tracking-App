@@ -70,7 +70,7 @@
         </div>
 
         <div class="mb-4">
-            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Worked Hours</label>
+            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Hours Worked</label>
             <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="hours_worked" value="{{ $timesheet->hours_worked }}" />
             @error('hours_worked')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

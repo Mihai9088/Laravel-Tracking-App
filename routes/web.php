@@ -36,13 +36,13 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
     Route::get('/timesheets', [TimeSheetController::class, 'index']);
     Route::get('/timesheets/create', [TimeSheetController::class, 'create']);
     Route::post('/timesheets', [TimeSheetController::class, 'store'])->name('timesheets.store');
     Route::get('/timesheets/{timesheet}/edit', [TimeSheetController::class, 'edit'])->name('timesheets.edit');
     Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
     Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
-    Route::get('/timesheets/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
     Route::get('/timesheets/export-csv', [TimeSheetController::class, 'exportToCsv'])->name('timesheets.export.csv');
 });
 Route::get('/register/verification', [MailController::class, 'sendMail']);

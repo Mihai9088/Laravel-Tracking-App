@@ -31,6 +31,7 @@
                             class="block text-sm font-medium text-gray-700">Filter by date</label>
                         <form action="{{ route('timesheets.filter') }}" method="get"
                             class="flex items-center space-y-4 md:space-y-0 md:space-x-4">
+                           @csrf
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 <div>
                                     <select name="date_filter"
