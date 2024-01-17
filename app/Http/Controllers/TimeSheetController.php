@@ -36,12 +36,14 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
-            'hours_worked' => 'required|numeric',
             'rate' => 'required|numeric',
             'description' => 'nullable|string',
         ]);
 
+        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
 
+        $workedHours = $timeIn->diffInHours($timeOut);
 
         TimeSheet::create([
             'project' => $request->input('project'),
@@ -50,16 +52,12 @@ class TimeSheetController extends Controller
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
-            'hours_worked' => $request->input('hours_worked'),
+            'hours_worked' => $workedHours,
             'rate' => $request->input('rate'),
             'description' => $request->input('description'),
         ]);
-        return redirect('/timesheets')->with('message', 'timesheet created successfully');
-    }
 
-    public function edit(TimeSheet $timesheet)
-    {
-        return view('timesheets.edit', ['timesheet' => $timesheet]);
+        return redirect('/timesheets')->with('message', 'Timesheet created successfully');
     }
 
     public function update(TimeSheet $timesheet, Request $request)
@@ -71,10 +69,15 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date',
             'time_out' => 'required|string',
-            'hours_worked' => 'required|numeric',
             'rate' => 'required|numeric',
             'description' => 'nullable|string',
         ]);
+
+        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
+
+        $workedHours = $timeIn->diffInHours($timeOut);
+
         $timesheet->update([
             'project' => $request->input('project'),
             'task' => $request->input('task'),
@@ -82,12 +85,17 @@ class TimeSheetController extends Controller
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
-            'hours_worked' => $request->input('hours_worked'),
+            'hours_worked' => $workedHours,
             'rate' => $request->input('rate'),
             'description' => $request->input('description'),
-
         ]);
-        return redirect('/timesheets')->with('message', 'timesheet updated successfully');
+
+        return redirect('/timesheets')->with('message', 'Timesheet updated successfully');
+    }
+
+    public function edit(TimeSheet $timesheet)
+    {
+        return view('timesheets.edit', ['timesheet' => $timesheet]);
     }
 
     public function destroy(TimeSheet $timesheet)
@@ -143,5 +151,14 @@ class TimeSheetController extends Controller
     public function exportToCsv()
     {
         return Excel::download(new timeSheetExport(), 'timesheet.csv');
+    }
+
+
+    public function workedHours(Request $request)
+    {
+        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
+
+        $workedHours = $timeIn->diffInHours($timeOut);
     }
 }

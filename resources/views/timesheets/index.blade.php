@@ -7,6 +7,7 @@
     <title>Laravel</title>
     <link rel="stylesheet" href="{{ asset('fontawesome-free-6.5.1-web/css/all.min.css') }}">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
