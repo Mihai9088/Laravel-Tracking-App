@@ -40,8 +40,8 @@ class TimeSheetController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
-        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
+        $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
 
         $workedHours = $timeIn->diffInHours($timeOut);
 
@@ -73,8 +73,8 @@ class TimeSheetController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
-        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
+        $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
 
         $workedHours = $timeIn->diffInHours($timeOut);
 
@@ -156,8 +156,8 @@ class TimeSheetController extends Controller
 
     public function workedHours(Request $request)
     {
-        $timeIn = Carbon::createFromFormat('H:i', $request->input('time_in'));
-        $timeOut = Carbon::createFromFormat('H:i', $request->input('time_out'));
+        $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
+        $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
 
         $workedHours = $timeIn->diffInHours($timeOut);
     }
