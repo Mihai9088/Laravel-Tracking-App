@@ -30,6 +30,9 @@
             >
         </li>
         
+        <li class="mx-2 md:mx-4 my-3 md:my-0">
+            <a href="/projects" class="hover:text-[#737373] duration-500" >Manage Projects</a>
+        </li>
 
 
         <li>

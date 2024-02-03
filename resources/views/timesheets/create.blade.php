@@ -20,22 +20,35 @@
         <div class="mb-4">
             <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Project</label>
             <select name="project" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
-                <option value="proiect1">Project 1</option>
-                <option value="proiect2">Project 2</option>
+                @foreach ($projects as $project)
+                    <option value="{{ $project->id }}">{{ $project->project }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="mb-4">
             <label for="task" class="block text-sm font-medium text-gray-700 mb-1">Task</label>
             <select name="task" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
-                <option value="task1">Task 1</option>
-                <option value="task2">Task 2</option>
+                <option value="bugFix">Bug Fixing</option>
+                <option value="featureImplementation">Feature Implementation</option>
+                <option value="codeRefactoring">Code Refactoring</option>
+                <option value="unitTesting">Unit Testing</option>
+                <option value="integrationTesting">Integration Testing</option>
+                <option value="performanceOptimization">Performance Optimization</option>
+                <option value="securityEnhancement">Security Enhancement</option>
+                <option value="apiDevelopment">API Development</option>
+                <option value="uiUxDesign">UI/UX Design</option>
+                <option value="errorHandling">Error Handling</option>
+                <option value="responsiveDesign">Responsive Design</option>
+                <option value="cloudIntegration">Cloud Integration</option>
+                <option value="codeOptimization">Code Optimization</option>
+                <option value="dataMigration">Data Migration</option>
             </select>
         </div>
 
         <div class="mb-4 flex">
             <div class="mr-2 w-1/2">
-                <label for="date_in" class="block text-sm font-medium text-gray-700 mb-1">Data In</label>
+                <label for="date_in" class="block text-sm font-medium text-gray-700 mb-1">Date In</label>
                 <input type="date" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="date_in" value="{{ old('date_in') }}" />
                 @error('date_in')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -53,7 +66,7 @@
 
         <div class="mb-4 flex">
             <div class="mr-2 w-1/2">
-                <label for="date_out" class="block text-sm font-medium text-gray-700 mb-1">Data Out</label>
+                <label for="date_out" class="block text-sm font-medium text-gray-700 mb-1">Date Out</label>
                 <input type="date" class="form-input w-full bg-gray-100 border-b-2 border-gray-300 p-2 rounded" name="date_out" value="{{ old('date_out') }}" />
                 @error('date_out')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -88,7 +101,7 @@
 
         <div class="mb-4">
             <label for="user_name" class="block text-sm font-medium text-gray-700 mb-1">User Name</label>
-            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ old('user_name') }}" />
+            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ old('user_name') }}" readonly/>
             @error('user_name')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror

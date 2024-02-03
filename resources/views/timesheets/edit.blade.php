@@ -11,7 +11,7 @@
 <body>
 
 <div class="max-w-md mx-auto mt-10 bg-white p-8 border border-gray-300 rounded">
-    <h1 class="text-2xl font-semibold mb-6">Edit new Timesheet</h1>
+    <h1 class="text-2xl font-semibold mb-6">Edit  Timesheet</h1>
 
     <form action="{{route('timesheets.update', ['timesheet' => $timesheet])}}" method="POST">
         @csrf
@@ -19,10 +19,12 @@
         <div class="mb-4">
             <label for="project" class="block text-sm font-medium text-gray-700 mb-1">Proiect</label>
             <select name="project" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
-                <option value="proiect1" {{ old('project', $timesheet->project) === 'proiect1' ? 'selected' : '' }}>Project 1</option>
-                <option value="proiect2" {{ old('project', $timesheet->project) === 'proiect2' ? 'selected' : '' }}>Project 2</option>
+                @foreach ($projects as $project)
+                    <option value="{{ $project->id }}" {{ old('project', $timesheet->project) == $project->id ? 'selected' : '' }}>{{ $project->project }}</option>
+                @endforeach
             </select>
         </div>
+        
 
         <div class="mb-4">
             <label for="task" class="block text-sm font-medium text-gray-700 mb-1">Task</label>
@@ -88,7 +90,7 @@
 
         <div class="mb-4">
             <label for="user_name" class="block text-sm font-medium text-gray-700 mb-1">User Name</label>
-            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ $timesheet->user_name }}" />
+            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ $timesheet->user_name }}"  readonly/>
             @error('user_name')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror

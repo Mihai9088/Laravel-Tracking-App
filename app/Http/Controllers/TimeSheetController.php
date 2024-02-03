@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\Project;
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -12,19 +13,33 @@ use App\Exports\timeSheetExport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\ProjectController;
 
 class TimeSheetController extends Controller
 {
 
+    protected $projectController;
+
+    public function __construct(ProjectController $projectController)
+    {
+        $this->projectController = $projectController;
+    }
+
     public function index()
     {
+
+
+
         $timeSheets = TimeSheet::paginate(3);
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
     public function create()
     {
-        return view('timesheets.create');
+        $projects = $this->projectController->getProjects();
+
+
+        return view('timesheets.create', ['projects' => $projects]);
     }
 
     public function store(Request $request)
@@ -36,26 +51,35 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
-            'user_name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
         $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
         $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
-
         $workedHours = $timeIn->diffInHours($timeOut);
+        $userName = auth()->user()->name;
+
+        $projects = $this->projectController->getProjects();
+        $project = $projects->find($request->input('project'));
+
+        $projectName =  $project->project;
+
+
+
 
         TimeSheet::create([
-            'project' => $request->input('project'),
+            'project' => $projectName,
             'task' => $request->input('task'),
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
             'hours_worked' => $workedHours,
-            'user_name' => $request->input('user_name'),
+            'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
+
+
 
         return redirect('/timesheets')->with('message', 'Timesheet created successfully');
     }
@@ -69,24 +93,30 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date',
             'time_out' => 'required|string',
-            'user_name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
         $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
         $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
-
         $workedHours = $timeIn->diffInHours($timeOut);
+        $userName = auth()->user()->name;
+
+        $projects = $this->projectController->getProjects();
+        $project = $projects->find($request->input('project'));
+
+        $projectName =  $project->project;
+
+
 
         $timesheet->update([
-            'project' => $request->input('project'),
+            'project' => $projectName,
             'task' => $request->input('task'),
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
             'hours_worked' => $workedHours,
-            'user_name' => $request->input('user_name'),
+            'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
 
@@ -95,7 +125,9 @@ class TimeSheetController extends Controller
 
     public function edit(TimeSheet $timesheet)
     {
-        return view('timesheets.edit', ['timesheet' => $timesheet]);
+        $projects = $this->projectController->getProjects();
+
+        return view('timesheets.edit', ['timesheet' => $timesheet, 'projects' => $projects]);
     }
 
     public function destroy(TimeSheet $timesheet)
@@ -104,6 +136,11 @@ class TimeSheetController extends Controller
         return redirect('/timesheets')->with('message', 'timesheet deleted successfully');
     }
 
+    public function deleteSelected(Request $request)
+    {
+
+        dd($request->all());
+    }
 
 
     public function filter(Request $request)

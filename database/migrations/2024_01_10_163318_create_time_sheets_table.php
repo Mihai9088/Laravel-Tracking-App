@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date_out')->nullable();
             $table->string('time_out')->nullable();
             $table->float('hours_worked', 8, 2);
-            $table->string('user_name')->nullable();
+            $table->string('user_name');
             $table->timestamps();
             $table->text('description')->nullable();
         });
