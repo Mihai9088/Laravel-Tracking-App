@@ -27,7 +27,7 @@ class timeSheetExport implements FromCollection
             'date_out',
             'time_out',
             'hours_worked',
-            'rate',
+            'user_name',
             'description',
         ];
     }

@@ -36,7 +36,7 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
-            'rate' => 'required|numeric',
+            'user_name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
@@ -53,7 +53,7 @@ class TimeSheetController extends Controller
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
             'hours_worked' => $workedHours,
-            'rate' => $request->input('rate'),
+            'user_name' => $request->input('user_name'),
             'description' => $request->input('description'),
         ]);
 
@@ -69,7 +69,7 @@ class TimeSheetController extends Controller
             'time_in' => 'required|string',
             'date_out' => 'required|date',
             'time_out' => 'required|string',
-            'rate' => 'required|numeric',
+            'user_name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
@@ -86,7 +86,7 @@ class TimeSheetController extends Controller
             'date_out' => $request->input('date_out'),
             'time_out' => $request->input('time_out'),
             'hours_worked' => $workedHours,
-            'rate' => $request->input('rate'),
+            'user_name' => $request->input('user_name'),
             'description' => $request->input('description'),
         ]);
 
@@ -151,14 +151,5 @@ class TimeSheetController extends Controller
     public function exportToCsv()
     {
         return Excel::download(new timeSheetExport(), 'timesheet.csv');
-    }
-
-
-    public function workedHours(Request $request)
-    {
-        $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
-        $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
-
-        $workedHours = $timeIn->diffInHours($timeOut);
     }
 }

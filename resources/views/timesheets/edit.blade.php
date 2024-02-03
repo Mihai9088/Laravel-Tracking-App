@@ -87,9 +87,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="rate" class="block text-sm font-medium text-gray-700 mb-1">Rate (hour by hour)</label>
-            <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="rate" value="{{ $timesheet->rate }}" />
-            @error('rate')
+            <label for="user_name" class="block text-sm font-medium text-gray-700 mb-1">User Name</label>
+            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ $timesheet->user_name }}" />
+            @error('user_name')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>

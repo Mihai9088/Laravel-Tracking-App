@@ -18,14 +18,14 @@ class TimeSheet extends Model
         'date_out',
         'time_out',
         'hours_worked',
-        'rate',
+        'user_name',
         'description',
     ];
 
     public static function getAllTimeSheets()
     {
         $result = DB::table('time_sheets')
-            ->select('id', 'project', 'task', 'date_in', 'time_in', 'date_out', 'time_out', 'hours_worked', 'rate', 'description')
+            ->select('id', 'project', 'task', 'date_in', 'time_in', 'date_out', 'time_out', 'hours_worked', 'user_name', 'description')
             ->get()->toArray();
         return $result;
     }

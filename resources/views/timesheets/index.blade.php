@@ -86,7 +86,7 @@
                                     Hours worked</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Rate</th>
+                                    User Name</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Description</th>
@@ -108,7 +108,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_out }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->time_out }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->hours_worked }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->rate }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->user_name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->description }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap"><a
                                         href="{{ route('timesheets.edit', $timesheet->id)}}" class="text-blue-500">Edit</a>
