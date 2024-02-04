@@ -74,6 +74,7 @@ class ProjectController extends Controller
     public function deleteSelected(Request $request)
     {
 
-        dd($request->all());
+        Project::whereIn('id',  $request->input('project'))->delete();
+        return redirect('/projects')->with('message', 'projects deleted successfully');
     }
 }

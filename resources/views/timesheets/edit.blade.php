@@ -25,13 +25,14 @@
             </select>
         </div>
         
-
         <div class="mb-4">
             <label for="task" class="block text-sm font-medium text-gray-700 mb-1">Task</label>
             <select name="task" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
-                <option value="task1" {{ old('task', $timesheet->task) === 'task1' ? 'selected' : '' }}>Task 1</option>
-                <option value="task2" {{ old('task', $timesheet->task) === 'task2' ? 'selected' : '' }}>Task 2</option>
-                
+                @foreach($taskOptions as $value => $label)
+                    <option value="{{ $value }}" {{ old('task', $timesheet->task) === $value ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
             </select>
         </div>
 
@@ -71,13 +72,7 @@
             </div>
         </div>
 
-        <div class="mb-4">
-            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Hours Worked</label>
-            <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="hours_worked" value="{{ old('hours_worked', $timesheet->hours_worked) }}" readonly />
-            @error('hours_worked')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+    
 
 
         <div class="mb-4">
@@ -88,13 +83,7 @@
             @enderror
         </div>
 
-        <div class="mb-4">
-            <label for="user_name" class="block text-sm font-medium text-gray-700 mb-1">User Name</label>
-            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ $timesheet->user_name }}"  readonly/>
-            @error('user_name')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+        
 
         <div class="mb-4">
             <button type="submit" class="bg-[#020617] text-white rounded py-2 px-4 hover:bg-[#1f2937]">Edit Timesheet</button>

@@ -6,6 +6,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimeSheetController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 /*
@@ -32,6 +33,9 @@ Route::post('/users/auth', [UserController::class, 'auth']);
 
 
 
+
+
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
 });
@@ -45,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/timesheets/{timesheet}/update', [TimeSheetController::class, 'update'])->name('timesheets.update');
     Route::delete('/timesheets/{timesheet}/destroy', [TimeSheetController::class, 'destroy'])->name('timesheets.destroy');
     Route::get('/timesheets/export-csv', [TimeSheetController::class, 'exportToCsv'])->name('timesheets.export.csv');
-    Route::post('/timesheets/delete-selected', [TimeSheetController::class, 'deleteSelected'])->name('timesheets.deleteSelected');
+    Route::delete('/timesheets/deleteSelected', [TimeSheetController::class, 'deleteSelected'])->name('timesheets.deleteSelected');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -55,5 +59,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/projects/{project}/update', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{project}/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::delete('/projects/deleteSelected', [ProjectController::class, 'deleteSelected'])->name('projects.deleteSelected');
 });
 Route::get('/register/verification', [MailController::class, 'sendMail']);

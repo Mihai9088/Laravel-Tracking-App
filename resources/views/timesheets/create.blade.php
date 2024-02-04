@@ -24,26 +24,21 @@
                     <option value="{{ $project->id }}">{{ $project->project }}</option>
                 @endforeach
             </select>
+            @error('project')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
         </div>
 
         <div class="mb-4">
             <label for="task" class="block text-sm font-medium text-gray-700 mb-1">Task</label>
             <select name="task" class="form-select w-full bg-gray-100 border border-gray-300 p-2 rounded">
-                <option value="bugFix">Bug Fixing</option>
-                <option value="featureImplementation">Feature Implementation</option>
-                <option value="codeRefactoring">Code Refactoring</option>
-                <option value="unitTesting">Unit Testing</option>
-                <option value="integrationTesting">Integration Testing</option>
-                <option value="performanceOptimization">Performance Optimization</option>
-                <option value="securityEnhancement">Security Enhancement</option>
-                <option value="apiDevelopment">API Development</option>
-                <option value="uiUxDesign">UI/UX Design</option>
-                <option value="errorHandling">Error Handling</option>
-                <option value="responsiveDesign">Responsive Design</option>
-                <option value="cloudIntegration">Cloud Integration</option>
-                <option value="codeOptimization">Code Optimization</option>
-                <option value="dataMigration">Data Migration</option>
+                @foreach($taskOptions as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
+                @endforeach
             </select>
+            @error('task')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4 flex">
@@ -82,13 +77,7 @@
             </div>
         </div>
 
-        <div class="mb-4">
-            <label for="hours_worked" class="block text-sm font-medium text-gray-700 mb-1">Hours Worked</label>
-            <input type="number" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="hours_worked" value="{{ old('hours_worked') }}" readonly />
-            @error('hours_worked')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+      
 
         <div class="mb-4">
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
@@ -99,13 +88,7 @@
         </div>
         
 
-        <div class="mb-4">
-            <label for="user_name" class="block text-sm font-medium text-gray-700 mb-1">User Name</label>
-            <input type="text" class="form-input w-full bg-gray-100 border border-gray-300 p-2 rounded" name="user_name" value="{{ old('user_name') }}" readonly/>
-            @error('user_name')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+     
 
         <div class="mb-4">
             <button type="submit" class="bg-[#020617] text-white rounded py-2 px-4 hover:bg-[#1f2937]">Add Timesheet</button>

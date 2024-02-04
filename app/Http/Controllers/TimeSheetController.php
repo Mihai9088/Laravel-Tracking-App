@@ -34,13 +34,36 @@ class TimeSheetController extends Controller
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $projects = $this->projectController->getProjects();
+        $taskOptions = [
+            'bugFix' => 'Bug Fixing',
+            'featureImplementation' => 'Feature Implementation',
+            'codeRefactoring' => 'Code Refactoring',
+            'unitTesting' => 'Unit Testing',
+            'integrationTesting' => 'Integration Testing',
+            'performanceOptimization' => 'Performance Optimization',
+            'securityEnhancement' => 'Security Enhancement',
+            'apiDevelopment' => 'API Development',
+            'uiUxDesign' => 'UI/UX Design',
+            'errorHandling' => 'Error Handling',
+            'responsiveDesign' => 'Responsive Design',
+            'cloudIntegration' => 'Cloud Integration',
+            'codeOptimization' => 'Code Optimization',
+            'dataMigration' => 'Data Migration',
+
+        ];
 
 
-        return view('timesheets.create', ['projects' => $projects]);
+
+
+
+        return view('timesheets.create', ['projects' => $projects, 'taskOptions' => $taskOptions]);
     }
+
+
+
 
     public function store(Request $request)
     {
@@ -65,11 +88,32 @@ class TimeSheetController extends Controller
         $projectName =  $project->project;
 
 
+        $taskOptions = [
+            'bugFix' => 'Bug Fixing',
+            'featureImplementation' => 'Feature Implementation',
+            'codeRefactoring' => 'Code Refactoring',
+            'unitTesting' => 'Unit Testing',
+            'integrationTesting' => 'Integration Testing',
+            'performanceOptimization' => 'Performance Optimization',
+            'securityEnhancement' => 'Security Enhancement',
+            'apiDevelopment' => 'API Development',
+            'uiUxDesign' => 'UI/UX Design',
+            'errorHandling' => 'Error Handling',
+            'responsiveDesign' => 'Responsive Design',
+            'cloudIntegration' => 'Cloud Integration',
+            'codeOptimization' => 'Code Optimization',
+            'dataMigration' => 'Data Migration',
+
+        ];
+
+        $selectedTask = $taskOptions[$request->input('task')];
+
+
 
 
         TimeSheet::create([
             'project' => $projectName,
-            'task' => $request->input('task'),
+            'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
@@ -81,7 +125,7 @@ class TimeSheetController extends Controller
 
 
 
-        return redirect('/timesheets')->with('message', 'Timesheet created successfully');
+        return redirect('/timesheets')->with(['message' => 'Timesheet created successfully', 'taskOptions' => $taskOptions]);
     }
 
     public function update(TimeSheet $timesheet, Request $request)
@@ -95,6 +139,26 @@ class TimeSheetController extends Controller
             'time_out' => 'required|string',
             'description' => 'nullable|string',
         ]);
+
+        $taskOptions = [
+            'bugFix' => 'Bug Fixing',
+            'featureImplementation' => 'Feature Implementation',
+            'codeRefactoring' => 'Code Refactoring',
+            'unitTesting' => 'Unit Testing',
+            'integrationTesting' => 'Integration Testing',
+            'performanceOptimization' => 'Performance Optimization',
+            'securityEnhancement' => 'Security Enhancement',
+            'apiDevelopment' => 'API Development',
+            'uiUxDesign' => 'UI/UX Design',
+            'errorHandling' => 'Error Handling',
+            'responsiveDesign' => 'Responsive Design',
+            'cloudIntegration' => 'Cloud Integration',
+            'codeOptimization' => 'Code Optimization',
+            'dataMigration' => 'Data Migration',
+
+        ];
+
+        $selectedTask = $taskOptions[$request->input('task')];
 
         $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
         $timeOut = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_out') . ' ' . $request->input('time_out'));
@@ -110,7 +174,7 @@ class TimeSheetController extends Controller
 
         $timesheet->update([
             'project' => $projectName,
-            'task' => $request->input('task'),
+            'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),
             'date_out' => $request->input('date_out'),
@@ -126,8 +190,25 @@ class TimeSheetController extends Controller
     public function edit(TimeSheet $timesheet)
     {
         $projects = $this->projectController->getProjects();
+        $taskOptions = [
+            'bugFix' => 'Bug Fixing',
+            'featureImplementation' => 'Feature Implementation',
+            'codeRefactoring' => 'Code Refactoring',
+            'unitTesting' => 'Unit Testing',
+            'integrationTesting' => 'Integration Testing',
+            'performanceOptimization' => 'Performance Optimization',
+            'securityEnhancement' => 'Security Enhancement',
+            'apiDevelopment' => 'API Development',
+            'uiUxDesign' => 'UI/UX Design',
+            'errorHandling' => 'Error Handling',
+            'responsiveDesign' => 'Responsive Design',
+            'cloudIntegration' => 'Cloud Integration',
+            'codeOptimization' => 'Code Optimization',
+            'dataMigration' => 'Data Migration',
 
-        return view('timesheets.edit', ['timesheet' => $timesheet, 'projects' => $projects]);
+        ];
+
+        return view('timesheets.edit', ['timesheet' => $timesheet, 'projects' => $projects, 'taskOptions' => $taskOptions]);
     }
 
     public function destroy(TimeSheet $timesheet)
@@ -138,8 +219,8 @@ class TimeSheetController extends Controller
 
     public function deleteSelected(Request $request)
     {
-
-        dd($request->all());
+        TimeSheet::whereIn('id',  $request->input('timesheet'))->delete();
+        return redirect('/timesheets')->with('message', 'timesheets deleted successfully');
     }
 
 

@@ -15,7 +15,7 @@
 <body class="bg-gray-100 font-sans">
     @include('navbar')
     <x-flashMessages />
-    <div class="max-w-7xl mx-auto p-4">
+    <div class="max-w-8xl mx-auto p-4">
         <div class="bg-white shadow-md rounded my-6">
             <div class="p-6 bg-gray-50">
                 <h1 class="text-3xl font-semibold mb-4">Timesheets</h1>
