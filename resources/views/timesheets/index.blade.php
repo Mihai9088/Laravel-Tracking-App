@@ -21,10 +21,7 @@
                 <h1 class="text-3xl font-semibold mb-4">Timesheets</h1>
                 <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
                     <div class="flex items-center space-x-4">
-                        <form action="{{ route('timesheets.deleteSelected') }}" method="post">
-                            @csrf
-                            <input type="submit" class="bg-[#020617] hover:bg-[#1f2937] text-white px-6 py-2 rounded-md" value="Delete Users">
-                        </form>
+                      
                         
                         <a href="/timesheets/create"
                             class="bg-[#020617] hover:bg-[#1f2937] text-white px-6 py-2 rounded-md  ">Create
@@ -68,8 +65,6 @@
                         class="min-w-full sm:border-collapse sm:border-gray-200 divide-y divide-gray-200 overflow-hidden sm:rounded-lg">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th></th>
-                              
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Project</th>
@@ -108,14 +103,6 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($timeSheets as $timesheet)
                             <tr>
-                               
-                                <td>
-                                    <input type="checkbox" name="ids[{{$timesheet->id}}]" class="ml-2" value="{{ $timesheet->id }}">
-                                </td>
-                              
-                                
-                               
-
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->project }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->task }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_in }}</td>
@@ -133,7 +120,6 @@
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="text-red-500 hover:cursor-pointer">Delete</button>
-                                      
                                     </form>
                                 </td>
                             </tr>
@@ -149,10 +135,6 @@
         </div>
     </div>
     @include('footer')
-
-
-    
-
 </body>
 
 </html>

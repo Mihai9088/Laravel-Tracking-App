@@ -32,46 +32,38 @@
                 <h2 class="text-2xl font-semibold mb-6">Projects List</h2>
                 @if(count($projects) > 0)
                 <div class="overflow-x-auto">
-                    <form method="post" action="{{ route('projects.deleteSelected') }}">
-                        @csrf
-                        <table class="min-w-full sm:border-collapse sm:border-gray-200 divide-y divide-gray-200 overflow-hidden sm:rounded-lg">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th></th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Project
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Edit
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Delete
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($projects as $project)
-                                <tr>
-                                    <td><input type="checkbox" name="project[]" class="checkboxes" value="{{ $project->id }}" /></td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $project->project }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('projects.edit', $project->id)}}" class="text-blue-500">Edit</a>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <form action="{{ route('projects.destroy', $project->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="text-red-500 hover:cursor-pointer">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <button type="submit" class="bg-[#020617] hover:bg-[#1f2937] text-white px-6 py-2 rounded-md">
-                            Delete Selected
-                        </button>
-                    </form>
+                    <table class="min-w-full sm:border-collapse sm:border-gray-200 divide-y divide-gray-200 overflow-hidden sm:rounded-lg">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Project
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Edit
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Delete
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($projects as $project)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $project->project }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{ route('projects.edit', $project->id)}}" class="text-blue-500">Edit</a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <form action="{{ route('projects.destroy', $project->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="text-red-500 hover:cursor-pointer">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 {{ $projects->links() }}
                 @else
