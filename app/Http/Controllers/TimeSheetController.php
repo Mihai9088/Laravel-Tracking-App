@@ -30,7 +30,7 @@ class TimeSheetController extends Controller
 
 
 
-        $timeSheets = TimeSheet::paginate(3);
+        $timeSheets = Timesheet::orderBy('date_in', 'desc')->paginate(3);
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
