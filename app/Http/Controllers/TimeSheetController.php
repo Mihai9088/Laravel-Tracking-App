@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\User;
 use App\Models\Project;
+
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -27,6 +29,8 @@ class TimeSheetController extends Controller
 
     public function index()
     {
+        // $user = User::find(1);
+        //$records = TimeSheet::whereBelongsTo($user, 'user')->get();
 
 
 
@@ -112,7 +116,7 @@ class TimeSheetController extends Controller
 
 
         TimeSheet::create([
-            'project' => $projectName,
+            'project' => $request->input('project'),
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),

@@ -21,21 +21,6 @@ use App\Http\Controllers\ForgotPasswordController;
 */
 
 
-
-
-Route::get('/', [UserController::class, 'index'])->name('/');
-Route::get('/register', [UserController::class, 'create']);
-Route::post('/users', [UserController::class, 'store']);
-Route::post('/logout', [UserController::class, 'logout']);
-Route::get('/login', [UserController::class, 'login']);
-Route::post('/users/auth', [UserController::class, 'auth']);
-
-
-
-
-
-
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
 });
@@ -61,4 +46,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/projects/{project}/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::delete('/projects/deleteSelected', [ProjectController::class, 'deleteSelected'])->name('projects.deleteSelected');
 });
+
+
+
 Route::get('/register/verification', [MailController::class, 'sendMail']);
+
+
+Route::get('/', [UserController::class, 'index'])->name('/');
+Route::get('/register', [UserController::class, 'create']);
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/login', [UserController::class, 'login']);
+Route::post('/users/auth', [UserController::class, 'auth']);
