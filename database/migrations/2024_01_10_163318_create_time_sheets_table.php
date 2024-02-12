@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('time_out')->nullable();
             $table->float('hours_worked', 8, 2);
             $table->string('user_name');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->text('description')->nullable();
         });

@@ -29,12 +29,11 @@ class TimeSheetController extends Controller
 
     public function index()
     {
-        // $user = User::find(1);
-        //$records = TimeSheet::whereBelongsTo($user, 'user')->get();
 
-
-
-        $timeSheets = Timesheet::orderBy('date_in', 'desc')->paginate(3);
+        $user = auth()->user();
+        $timeSheets = TimeSheet::where('user_id', $user->id)
+            ->orderBy('date_in', 'desc')
+            ->paginate(3);
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
@@ -79,6 +78,7 @@ class TimeSheetController extends Controller
             'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
             'description' => 'nullable|string',
+            'user_id' => 'exists:users,id',
         ]);
 
         $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
@@ -90,6 +90,9 @@ class TimeSheetController extends Controller
         $project = $projects->find($request->input('project'));
 
         $projectName =  $project->project;
+
+        $user = auth()->user();
+
 
 
         $taskOptions = [
@@ -116,6 +119,7 @@ class TimeSheetController extends Controller
 
 
         TimeSheet::create([
+            'user_id' => $user->id,
             'project' => $request->input('project'),
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),

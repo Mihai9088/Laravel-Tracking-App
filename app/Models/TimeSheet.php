@@ -18,6 +18,7 @@ class TimeSheet extends Model
     }
 
     protected $fillable = [
+        'user_id',
         'project',
         'task',
         'date_in',
