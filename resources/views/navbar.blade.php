@@ -1,4 +1,4 @@
-<nav class=" bg-white shadow md:flex md:items-center md:justify-between">
+<nav class=" bg-white shadow md:flex md:items-center md:justify-between ">
     <div class="flex justify-between items-center">
         <a href="/" class="  mx-2 md:mx-4 my-3 md:my-0 cursor-pointer">
             <img class="w-[130px]" src="{{ asset('images/logo.png') }}" alt=""></a>

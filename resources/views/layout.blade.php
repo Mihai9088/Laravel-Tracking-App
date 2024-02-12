@@ -12,21 +12,24 @@
        
 
     </head>
+    
     <body >
-    @include('navbar')
+        @include('navbar')
+  
     <x-flashMessages />
 
-    @yield('content')
-    <div class="flex items-center justify-center h-screen w-screen">
-        <div class="  text-black p-4">
-            <h1 class="text-3xl font-bold mb-2">Welcome to the Home Page!</h1>
-            <p class="mb-4">Please login or register to use our features.</p>
+    
+    <div  style="background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.75)), url('{{ asset('images/time.jpg') }}'); background-size: cover;" class="h-screen flex items-center justify-center"> 
+       
+
+        <div class="text-white w-[100%] absolute top-1/2  -translate-y-1/2 text-center">
+            <h1 class="text-3xl mt-[80px] mb-2">Start Tracking Your Time</h1>
+            <p class ="text-xl leading-8 ">Get started today by starting to work on a new project.</p>
         </div>
+
     </div>
     
 
-    <footer>
-        @include('footer')
-    </footer>
+   
     </body>
 </html>
