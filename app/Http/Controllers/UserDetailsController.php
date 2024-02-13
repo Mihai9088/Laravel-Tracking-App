@@ -18,14 +18,14 @@ class UserDetailsController extends Controller
     }
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(3);
         return view('usersInfo.index', compact('users'));
     }
 
     public function details(User $user)
     {
 
-        $timesheets = $this->timeSheetController->getTimeSheets($user);
+        $timesheets = $this->timeSheetController->getTimeSheets($user)->paginate(3);
         return view('usersInfo.details', compact('user', 'timesheets'));
     }
 }

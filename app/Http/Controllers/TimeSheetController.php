@@ -27,10 +27,8 @@ class TimeSheetController extends Controller
     public function getTimeSheets(User $user)
     {
 
-        $timeSheets = TimeSheet::where('user_id',  $user->id)
-            ->orderBy('date_in', 'desc')
-            ->get();
-        return $timeSheets;
+        return TimeSheet::where('user_id', $user->id)
+            ->orderBy('date_in', 'desc');
     }
 
     public function __construct(ProjectController $projectController)

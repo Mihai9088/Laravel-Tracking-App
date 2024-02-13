@@ -16,7 +16,6 @@
 <body class="bg-gray-100 font-sans">
     @include('navbar')
 
-
     <div class="max-w-7xl mx-auto p-4">
         <div class="bg-white shadow-md rounded my-6">
             <div class="p-6 bg-gray-50">
@@ -28,52 +27,53 @@
                         <table class="min-w-full sm:border-collapse sm:border-gray-200 divide-y divide-gray-200 overflow-hidden sm:rounded-lg">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Project</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Task</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date In</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Time In</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date Out</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Time Out</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Hours worked</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    User Name</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Description</th>
-                              
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Project
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Task
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Date In
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Time In
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Date Out
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Time Out
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Hours worked
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        User Name
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Description
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($timesheets as $timesheet)
                                     <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->project }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->task }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_in }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->time_in }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_out }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->time_out }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->hours_worked }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->user_name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->description }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->project }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->task }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_in }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->time_in }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->date_out }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->time_out }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->hours_worked }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->user_name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $timesheet->description }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
+                        {{ $timesheets->links() }} <!-- Adaugă link-urile de paginare -->
                     </div>
                 @else
                     <p class="text-gray-500">There are no timesheets available for {{ $user->name }}.</p>
@@ -83,6 +83,6 @@
         @include('footer')
     </div>
 
-
 </body>
+
 </html>
