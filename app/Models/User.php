@@ -14,7 +14,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    public function timesheetss()
+    public function timesheets()
     {
         return $this->hasMany(TimeSheet::class);
     }

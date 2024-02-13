@@ -35,6 +35,10 @@
                 <a href="/projects" class="hover:text-[#737373] duration-500">Manage Projects</a>
             </li>
 
+            <li class="mx-2 md:mx-4 my-3 md:my-0">
+                <a href="/users" class="hover:text-[#737373] duration-500">See Users</a>
+            </li>
+
             <li>
                 <form action="/logout" method="POST" class="inline mr-4">
                     @csrf

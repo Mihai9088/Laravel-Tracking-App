@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 use App\Exports\timeSheetExport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ProjectController;
 
@@ -21,6 +22,16 @@ class TimeSheetController extends Controller
 {
 
     protected $projectController;
+
+
+    public function getTimeSheets(User $user)
+    {
+
+        $timeSheets = TimeSheet::where('user_id',  $user->id)
+            ->orderBy('date_in', 'desc')
+            ->get();
+        return $timeSheets;
+    }
 
     public function __construct(ProjectController $projectController)
     {

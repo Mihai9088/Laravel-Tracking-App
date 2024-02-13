@@ -6,6 +6,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimeSheetController;
+use App\Http\Controllers\UserDetailsController;
 use App\Http\Controllers\ForgotPasswordController;
 
 
@@ -45,6 +46,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/projects/{project}/update', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{project}/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::delete('/projects/deleteSelected', [ProjectController::class, 'deleteSelected'])->name('projects.deleteSelected');
+});
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UserDetailsController::class, 'index'])->name('usersInfo.index');
+    Route::get('/users/{user}', [UserDetailsController::class, 'details'])->name('usersInfo.details');
 });
 
 
