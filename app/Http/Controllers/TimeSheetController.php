@@ -129,7 +129,7 @@ class TimeSheetController extends Controller
 
         TimeSheet::create([
             'user_id' => $user->id,
-            'project' => $request->input('project'),
+            'project' => $projectName,
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
             'time_in' => $request->input('time_in'),
@@ -140,10 +140,19 @@ class TimeSheetController extends Controller
             'description' => $request->input('description'),
         ]);
 
+        /*    TimeSheet::create($request->all() + [
+            'project' => $projectName,
+            'user_id' => $user->id,
+            'task' => $selectedTask,
+            'hours_worked' => $workedHours,
+            'user_name' => $userName,
+        ]);    */
+
 
 
         return redirect('/timesheets')->with(['message' => 'Timesheet created successfully', 'taskOptions' => $taskOptions]);
     }
+
 
     public function update(TimeSheet $timesheet, Request $request)
     {
