@@ -100,7 +100,11 @@ class TimeSheetController extends Controller
 
         $projectName =  $project->project;
 
+
+
         $user = auth()->user();
+
+
 
 
 
@@ -127,7 +131,7 @@ class TimeSheetController extends Controller
 
 
 
-        TimeSheet::create([
+        /*  TimeSheet::create([
             'user_id' => $user->id,
             'project' => $projectName,
             'task' => $selectedTask,
@@ -139,14 +143,18 @@ class TimeSheetController extends Controller
             'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
+        */
 
-        /*    TimeSheet::create($request->all() + [
-            'project' => $projectName,
-            'user_id' => $user->id,
-            'task' => $selectedTask,
-            'hours_worked' => $workedHours,
-            'user_name' => $userName,
-        ]);    */
+
+        TimeSheet::create(
+            $request->except('project') + [
+                'project' => $projectName,
+                'user_id' => $user->id,
+                'task' => $selectedTask,
+                'hours_worked' => $workedHours,
+                'user_name' => $userName,
+            ]
+        );
 
 
 
@@ -198,7 +206,16 @@ class TimeSheetController extends Controller
 
 
 
-        $timesheet->update([
+        $timesheet->update(
+            $request->except('project') + [
+                'project' => $projectName,
+                'task' => $selectedTask,
+                'hours_worked' => $workedHours,
+                'user_name' => $userName,
+            ]
+        );
+
+        /*     $timesheet->update([
             'project' => $projectName,
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
@@ -209,6 +226,7 @@ class TimeSheetController extends Controller
             'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
+        */
 
         return redirect('/timesheets')->with('message', 'Timesheet updated successfully');
     }

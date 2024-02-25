@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimeSheetController;
 use App\Http\Controllers\UserDetailsController;
-use App\Http\Controllers\ForgotPasswordController;
+
 
 
 /*
@@ -22,9 +22,7 @@ use App\Http\Controllers\ForgotPasswordController;
 */
 
 
-Route::middleware(['guest'])->group(function () {
-    Route::get('/login', [UserController::class, 'login'])->name('login');
-});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
@@ -60,9 +58,16 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/register/verification', [MailController::class, 'sendMail']);
 
 
+
+
+
 Route::get('/', [UserController::class, 'index'])->name('/');
 Route::get('/register', [UserController::class, 'create']);
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/users/auth', [UserController::class, 'auth']);
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+});
