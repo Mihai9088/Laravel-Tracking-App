@@ -47,6 +47,8 @@
                         <a href="/register" class="text-laravel text-blue-500">Register</a>
                     </p>
                 </div>
+                
+                </div>
             </form>
         </div>
     </div>

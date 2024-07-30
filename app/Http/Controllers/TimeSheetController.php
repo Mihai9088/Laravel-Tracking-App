@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\User;
 use App\Models\Project;
+
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Exports\timeSheetExport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ProjectController;
 
@@ -19,6 +22,14 @@ class TimeSheetController extends Controller
 {
 
     protected $projectController;
+
+
+    public function getTimeSheets(User $user)
+    {
+
+        return TimeSheet::where('user_id', $user->id)
+            ->orderBy('date_in', 'desc');
+    }
 
     public function __construct(ProjectController $projectController)
     {
@@ -28,9 +39,10 @@ class TimeSheetController extends Controller
     public function index()
     {
 
-
-
-        $timeSheets = Timesheet::orderBy('date_in', 'desc')->paginate(3);
+        $user = auth()->user();
+        $timeSheets = TimeSheet::where('user_id', $user->id)
+            ->orderBy('date_in', 'desc')
+            ->paginate(3);
         return view('timesheets.index', ['timeSheets' => $timeSheets]);
     }
 
@@ -75,6 +87,7 @@ class TimeSheetController extends Controller
             'date_out' => 'required|date|after_or_equal:date_in',
             'time_out' => 'required|string',
             'description' => 'nullable|string',
+            'user_id' => 'exists:users,id',
         ]);
 
         $timeIn = Carbon::createFromFormat('Y-m-d H:i', $request->input('date_in') . ' ' . $request->input('time_in'));
@@ -86,6 +99,13 @@ class TimeSheetController extends Controller
         $project = $projects->find($request->input('project'));
 
         $projectName =  $project->project;
+
+
+
+        $user = auth()->user();
+
+
+
 
 
         $taskOptions = [
@@ -111,7 +131,8 @@ class TimeSheetController extends Controller
 
 
 
-        TimeSheet::create([
+        /*  TimeSheet::create([
+            'user_id' => $user->id,
             'project' => $projectName,
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
@@ -122,11 +143,24 @@ class TimeSheetController extends Controller
             'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
+        */
+
+
+        TimeSheet::create(
+            $request->except('project') + [
+                'project' => $projectName,
+                'user_id' => $user->id,
+                'task' => $selectedTask,
+                'hours_worked' => $workedHours,
+                'user_name' => $userName,
+            ]
+        );
 
 
 
         return redirect('/timesheets')->with(['message' => 'Timesheet created successfully', 'taskOptions' => $taskOptions]);
     }
+
 
     public function update(TimeSheet $timesheet, Request $request)
     {
@@ -172,7 +206,16 @@ class TimeSheetController extends Controller
 
 
 
-        $timesheet->update([
+        $timesheet->update(
+            $request->except('project') + [
+                'project' => $projectName,
+                'task' => $selectedTask,
+                'hours_worked' => $workedHours,
+                'user_name' => $userName,
+            ]
+        );
+
+        /*     $timesheet->update([
             'project' => $projectName,
             'task' => $selectedTask,
             'date_in' => $request->input('date_in'),
@@ -183,6 +226,7 @@ class TimeSheetController extends Controller
             'user_name' => $userName,
             'description' => $request->input('description'),
         ]);
+        */
 
         return redirect('/timesheets')->with('message', 'Timesheet updated successfully');
     }

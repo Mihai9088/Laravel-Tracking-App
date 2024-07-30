@@ -6,7 +6,8 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimeSheetController;
-use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\UserDetailsController;
+
 
 
 /*
@@ -22,23 +23,6 @@ use App\Http\Controllers\ForgotPasswordController;
 
 
 
-
-Route::get('/', [UserController::class, 'index'])->name('/');
-Route::get('/register', [UserController::class, 'create']);
-Route::post('/users', [UserController::class, 'store']);
-Route::post('/logout', [UserController::class, 'logout']);
-Route::get('/login', [UserController::class, 'login']);
-Route::post('/users/auth', [UserController::class, 'auth']);
-
-
-
-
-
-
-
-Route::middleware(['guest'])->group(function () {
-    Route::get('/login', [UserController::class, 'login'])->name('login');
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/filter', [TimeSheetController::class, 'filter'])->name('timesheets.filter');
@@ -61,4 +45,29 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/projects/{project}/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::delete('/projects/deleteSelected', [ProjectController::class, 'deleteSelected'])->name('projects.deleteSelected');
 });
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UserDetailsController::class, 'index'])->name('usersInfo.index');
+    Route::get('/users/{user}', [UserDetailsController::class, 'details'])->name('usersInfo.details');
+});
+
+
+
 Route::get('/register/verification', [MailController::class, 'sendMail']);
+
+
+
+
+
+Route::get('/', [UserController::class, 'index'])->name('/');
+Route::get('/register', [UserController::class, 'create']);
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/login', [UserController::class, 'login']);
+Route::post('/users/auth', [UserController::class, 'auth']);
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+});

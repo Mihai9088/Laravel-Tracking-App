@@ -35,9 +35,8 @@ class ProjectController extends Controller
 
 
 
-        Project::create([
-            'project' => $request->input('project'),
-        ]);
+        Project::create($request->all());
+
 
 
 
